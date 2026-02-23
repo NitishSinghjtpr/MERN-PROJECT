@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import User from "../Models/userModel.js";   // ⭐ THIS WAS THE MAIN MISSING LINE
-
+import User from "../Models/userModel.js";  
+import jwtToken from '../Utils/jwtwebToken.js'
 export const userRegister = async (req, res) => {
   try {
     const { fullname, username, email, password, gender, profilepic } = req.body;
@@ -34,7 +34,10 @@ export const userRegister = async (req, res) => {
       profilepic: gender === "male" ? profileBoy : profileGirl
     });
 
-    await newUser.save();
+    if(newUser){
+        await newUser.save();
+        jwtToken(newUser._id,res)
+    }
     
 
     return res.status(200).send({
