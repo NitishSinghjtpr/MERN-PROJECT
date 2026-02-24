@@ -4,6 +4,7 @@ import dbConnect from './Database/dbconnection.js';
 import authRouter from './rout/authUser.js';
 import messageRouter from './rout/messageRout.js'
 import cookieParser from 'cookie-parser';
+import userRouter from './rout/userRout.js'
 
 
 const app=express();
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use('/api/auth',authRouter)
 app.use('/api/message',messageRouter)
+app.use('/api/user',userRouter)
 
 const port = process.env.PORT || 5000;
 
